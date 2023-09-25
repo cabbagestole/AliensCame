@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf202w0iulypt"]
+
+[ext_resource type="Script" path="res://Main.cs" id="1_lrqrl"]
+[ext_resource type="PackedScene" uid="uid://bq8474fl8rdq" path="res://resource/scenes/util/InputSystem.tscn" id="2_wjdnk"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_lrqrl")
+InputSystem = ExtResource("2_wjdnk")
