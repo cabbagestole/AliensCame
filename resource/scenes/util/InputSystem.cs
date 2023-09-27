@@ -42,27 +42,35 @@ public partial class InputSystem : Node
 
 	private void notifyObservers(GUBButton button, GUBButtonState state, int durationCount)
 	{
-		_buttonObserver.Invoke(button, state, durationCount);
+		_buttonObserver?.Invoke(button, state, durationCount);
 	}
 
 
 
 	// keyboad-direction-key and joypad-L-stick observer
 	private Action<Vector2> _directionObserver = null;
+	private Action<Vector2> _directionOnceObserver = null;
 	
-	public void AddObserver(Action<Vector2> callback)
+	public void AddObserver(Action<Vector2> callback, bool isOnce = false)
 	{
-		_directionObserver+= callback;
+		if(isOnce){
+			_directionOnceObserver+= callback;
+		}else{
+			_directionObserver+= callback;
+		}
 	}
 	
 	public void RemoveObserver(Action<Vector2> callback)
 	{
 		_directionObserver-= callback;
+		_directionOnceObserver-= callback;
 	}
 
 	private void notifyObservers(Vector2 vec)
 	{
-		_directionObserver.Invoke(vec);
+		_directionObserver?.Invoke(vec);
+		if(_isFirstCall)
+			_directionOnceObserver?.Invoke(vec);
 	}
 	
 
@@ -235,8 +243,9 @@ public partial class InputSystem : Node
 	private bool _goSouth = false;
 	private bool _goEast = false;
 	private bool _goWest = false;
+
 	private bool _isMove = false;
-	
+	private bool _isFirstCall = true;	
 	
 	public override void _PhysicsProcess(double delta)
 	{
@@ -257,11 +266,13 @@ public partial class InputSystem : Node
 			}else{
 				notifyObservers(new Vector2(_x, _y));
 			}
+			_isFirstCall = false;
 		}else{
 			// this is service. Send Vector.Zero only once when there is no more input.
 			if(_isMove){
-				notifyObservers(new Vector2(0, 0));
+				notifyObservers(Vector2.Zero);
 				_isMove = false;
+				_isFirstCall = true;
 			}
 		}
 	}

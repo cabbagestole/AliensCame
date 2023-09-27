@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://drvyvuajpqhh3"]
+
+[ext_resource type="Script" path="res://resource/scenes/outgame/control/Control.cs" id="1_i7y5f"]
+[ext_resource type="Texture2D" uid="uid://drx02dd7q2mbf" path="res://resource/scenes/outgame/control/Control.png" id="2_065vr"]
+
+[node name="Control" type="CanvasLayer"]
+script = ExtResource("1_i7y5f")
+
+[node name="Control" type="Sprite2D" parent="."]
+position = Vector2(192, 144)
+scale = Vector2(2, 2)
+texture = ExtResource("2_065vr")

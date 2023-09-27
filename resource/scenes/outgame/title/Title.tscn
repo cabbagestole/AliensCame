@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://cq6o4tkox5y4y"]
+
+[ext_resource type="Script" path="res://resource/scenes/outgame/title/Title.cs" id="1_onj8p"]
+[ext_resource type="Texture2D" uid="uid://djacnt2p8avfx" path="res://resource/scenes/outgame/title/Title.png" id="1_xpma6"]
+[ext_resource type="Texture2D" uid="uid://cfl3qqrlfcp13" path="res://resource/scenes/outgame/title/Selector01.png" id="3_a1ti0"]
+[ext_resource type="Texture2D" uid="uid://ddqt2y4ojdwvx" path="res://resource/scenes/outgame/title/Selector02.png" id="4_aifrl"]
+[ext_resource type="AudioStream" uid="uid://dcwjhifigy0c8" path="res://resource/sound/SE-Click.wav" id="5_0hy6w"]
+
+[node name="Title" type="CanvasLayer"]
+script = ExtResource("1_onj8p")
+
+[node name="Title" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(192, 145)
+scale = Vector2(2, 2)
+texture = ExtResource("1_xpma6")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 170.0
+offset_top = 133.0
+offset_right = 210.0
+offset_bottom = 156.0
+text = "start"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 148.0
+offset_top = 193.0
+offset_right = 224.0
+offset_bottom = 219.0
+text = "operation"
+
+[node name="Selector01" type="Sprite2D" parent="."]
+position = Vector2(190, 144)
+texture = ExtResource("3_a1ti0")
+
+[node name="Selector02" type="Sprite2D" parent="."]
+position = Vector2(191, 206)
+texture = ExtResource("4_aifrl")
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_0hy6w")

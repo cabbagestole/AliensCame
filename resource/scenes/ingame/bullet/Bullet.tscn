@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckkvuabjpxjva"]
+
+[ext_resource type="Script" path="res://resource/scenes/ingame/bullet/Bullet.cs" id="1_1b774"]
+[ext_resource type="Texture2D" uid="uid://dmk5jbhfb7anx" path="res://resource/scenes/ingame/bullet/Bullet.png" id="1_nlnps"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_upusx"]
+radius = 4.0
+height = 18.0
+
+[node name="Bullet" type="CharacterBody2D"]
+script = ExtResource("1_1b774")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_upusx")
+
+[node name="Bullet" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_nlnps")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]

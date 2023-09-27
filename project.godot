@@ -15,6 +15,12 @@ run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=384
+window/size/viewport_height=288
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="AliensCome"

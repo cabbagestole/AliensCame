@@ -34,13 +34,10 @@ public enum GUBButtonState
 	Release = 2,
 }
 
-/*
-// joypad direction-pad
-public enum GUBDPad
+public enum GameScene
 {
-	Up = 0,
-	Down = 1,
-	Right = 2,
-	Left = 3,
+	Main = 0,
+	Title = 1,
+	Control = 2,
+	InGame = 3,
 }
-*/

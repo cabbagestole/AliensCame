@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bf202w0iulypt"]
+[gd_scene load_steps=7 format=3 uid="uid://bf202w0iulypt"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_lrqrl"]
 [ext_resource type="PackedScene" uid="uid://bq8474fl8rdq" path="res://resource/scenes/util/InputSystem.tscn" id="2_wjdnk"]
 [ext_resource type="PackedScene" uid="uid://dom28k3s4okyp" path="res://resource/scenes/util/stub.tscn" id="3_i1hp3"]
+[ext_resource type="PackedScene" uid="uid://cq6o4tkox5y4y" path="res://resource/scenes/outgame/title/Title.tscn" id="3_sml78"]
+[ext_resource type="PackedScene" uid="uid://drvyvuajpqhh3" path="res://resource/scenes/outgame/control/Control.tscn" id="4_qap0w"]
+[ext_resource type="PackedScene" uid="uid://cfci1apyjpiae" path="res://resource/scenes/ingame/InGame.tscn" id="5_xrmid"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_lrqrl")
 InputSystem = ExtResource("2_wjdnk")
+Title = ExtResource("3_sml78")
+Control = ExtResource("4_qap0w")
+InGame = ExtResource("5_xrmid")
 Stub = ExtResource("3_i1hp3")

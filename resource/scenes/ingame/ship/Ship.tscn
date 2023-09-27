@@ -1,0 +1,42 @@
+[gd_scene load_steps=11 format=3 uid="uid://csjsi1fihk2gl"]
+
+[ext_resource type="Texture2D" uid="uid://bf7lu7hmnlcds" path="res://resource/scenes/ingame/ship/Ship.png" id="1_1fjcs"]
+[ext_resource type="Script" path="res://resource/scenes/ingame/ship/Ship.cs" id="1_pvqgk"]
+[ext_resource type="PackedScene" uid="uid://ckkvuabjpxjva" path="res://resource/scenes/ingame/bullet/Bullet.tscn" id="2_kxlih"]
+[ext_resource type="Shader" path="res://resource/scenes/ingame/ship/Charge.gdshader" id="3_1p8v6"]
+[ext_resource type="PackedScene" uid="uid://cxt7nr7dklj6n" path="res://resource/scenes/ingame/bullet/ChargeBullet.tscn" id="3_6yqm8"]
+[ext_resource type="Texture2D" uid="uid://bl3jsmfjgkpww" path="res://resource/scenes/ingame/ship/Charge.png" id="3_nwvtb"]
+[ext_resource type="AudioStream" uid="uid://bidn3wifp62aq" path="res://resource/sound/SE-ShipBullet.wav" id="6_3cixk"]
+[ext_resource type="AudioStream" uid="uid://gdvmmk0uovdf" path="res://resource/sound/SE-ShipChargeBullet.wav" id="7_aqpqv"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tm2rd"]
+radius = 6.0
+height = 26.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycrf0"]
+shader = ExtResource("3_1p8v6")
+shader_parameter/fill = 0.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_pvqgk")
+Bullet = ExtResource("2_kxlih")
+ChargeBullet = ExtResource("3_6yqm8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_tm2rd")
+
+[node name="Ship" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_1fjcs")
+
+[node name="Charge" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ycrf0")
+position = Vector2(0, -1)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_nwvtb")
+
+[node name="BulletSE" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_3cixk")
+
+[node name="ChargeBulletSE" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_aqpqv")
