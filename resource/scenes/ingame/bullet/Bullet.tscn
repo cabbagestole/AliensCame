@@ -7,8 +7,9 @@
 radius = 4.0
 height = 18.0
 
-[node name="Bullet" type="CharacterBody2D"]
+[node name="Bullet" type="Area2D"]
 script = ExtResource("1_1b774")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_upusx")

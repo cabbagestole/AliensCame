@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class ChargeBullet : NotifiableCharacterBody2D
+public partial class ChargeBullet : NotifiableArea2D
 {
 	[Export]private float Speed = 400;
 	private Vector2 _screenSize;
@@ -27,9 +27,10 @@ public partial class ChargeBullet : NotifiableCharacterBody2D
 		Position = next;
 		_sprite.FlipH = (0 == ((int)next.Y) % 2)? true: false;
 	}
-	
+
 	private void OnVisibleOnScreenNotifier2DScreenExited()
 	{
+		GD.Print("ChargeBullet out of screen");
 		QueueFree();
 		notifyObservers();
 	}

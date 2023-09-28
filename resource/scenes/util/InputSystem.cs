@@ -21,7 +21,7 @@ public partial class InputSystem : Node
 	[Export] public double IgnoreMicromotionRatio = 0.1;
 	
 	// Number of frames to wait after starting to press the button 
-	[Export] public int DelayFrameCount = 10;
+	[Export] public int DelayFrameCount = 15;
 
 	// keyboad and joypad-button observer
 	// [note]

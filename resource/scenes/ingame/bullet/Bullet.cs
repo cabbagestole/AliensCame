@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Bullet : NotifiableCharacterBody2D
+public partial class Bullet : NotifiableArea2D
 {
 	[Export]private float Speed = 300;
 	private Vector2 _screenSize;
@@ -24,12 +24,15 @@ public partial class Bullet : NotifiableCharacterBody2D
 		next.Y = next.Y -(Speed * (float)delta );
 		Position = next;
 	}
-	
+
 	private void OnVisibleOnScreenNotifier2DScreenExited()
 	{
+		GD.Print("Bullet out of screen");
 		QueueFree();
 		notifyObservers();
 	}
 }
+
+
 
 

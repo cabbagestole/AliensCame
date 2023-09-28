@@ -7,9 +7,10 @@
 radius = 6.0
 height = 14.0
 
-[node name="ChargeBullet" type="CharacterBody2D"]
+[node name="ChargeBullet" type="Area2D"]
 script = ExtResource("1_vu87g")
-Speed = 100.0
+Speed = 200.0
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_7x1p1")
@@ -17,3 +18,7 @@ shape = SubResource("CapsuleShape2D_7x1p1")
 [node name="ChargeBullet" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("1_ow71n")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]

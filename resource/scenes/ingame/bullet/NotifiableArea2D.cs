@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class NotifiableCharacterBody2D : CharacterBody2D
+public partial class NotifiableArea2D : Area2D
 {
 	private Action _observer = null;
 	

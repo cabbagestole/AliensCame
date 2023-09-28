@@ -41,3 +41,9 @@ public enum GameScene
 	Control = 2,
 	InGame = 3,
 }
+
+public enum Direction{
+		East = 0,
+		West = 1,
+	}
+	

@@ -4,4 +4,3 @@
 
 [node name="InputSystem" type="Node"]
 script = ExtResource("1_vnmjj")
-DelayFrameCount = 60

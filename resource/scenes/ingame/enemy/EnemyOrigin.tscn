@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2rrk6030mig6"]
+
+[ext_resource type="Script" path="res://resource/scenes/ingame/enemy/EnemyOrigin.cs" id="1_wbpyq"]
+[ext_resource type="PackedScene" uid="uid://b4bm4effngkdy" path="res://resource/scenes/ingame/enemy/EnemyFM.tscn" id="2_u76qx"]
+
+[node name="EnemyOrigin" type="Node2D"]
+script = ExtResource("1_wbpyq")
+EnemyFM = ExtResource("2_u76qx")

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Ship : CharacterBody2D
+public partial class Ship : Area2D
 {
 	public InputSystem InputSystem { get; set; }
 	[Export] private float Speed = 200;

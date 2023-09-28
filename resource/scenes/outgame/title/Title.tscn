@@ -11,30 +11,30 @@ script = ExtResource("1_onj8p")
 
 [node name="Title" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(192, 145)
-scale = Vector2(2, 2)
+position = Vector2(288, 216)
+scale = Vector2(3, 3)
 texture = ExtResource("1_xpma6")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 170.0
-offset_top = 133.0
-offset_right = 210.0
-offset_bottom = 156.0
+offset_left = 274.0
+offset_top = 162.0
+offset_right = 314.0
+offset_bottom = 188.0
 text = "start"
 
 [node name="Label2" type="Label" parent="."]
-offset_left = 148.0
-offset_top = 193.0
-offset_right = 224.0
-offset_bottom = 219.0
+offset_left = 250.0
+offset_top = 234.0
+offset_right = 326.0
+offset_bottom = 260.0
 text = "operation"
 
 [node name="Selector01" type="Sprite2D" parent="."]
-position = Vector2(190, 144)
+position = Vector2(288, 172)
 texture = ExtResource("3_a1ti0")
 
 [node name="Selector02" type="Sprite2D" parent="."]
-position = Vector2(191, 206)
+position = Vector2(289, 246)
 texture = ExtResource("4_aifrl")
 
 [node name="Click" type="AudioStreamPlayer" parent="."]

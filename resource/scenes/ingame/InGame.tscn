@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfci1apyjpiae"]
+[gd_scene load_steps=7 format=3 uid="uid://cfci1apyjpiae"]
 
 [ext_resource type="Script" path="res://resource/scenes/ingame/InGame.cs" id="1_tc6hg"]
 [ext_resource type="Shader" path="res://resource/scenes/ingame/InGame.gdshader" id="2_2thkk"]
 [ext_resource type="PackedScene" uid="uid://csjsi1fihk2gl" path="res://resource/scenes/ingame/ship/Ship.tscn" id="2_7qo4k"]
+[ext_resource type="PackedScene" uid="uid://c2rrk6030mig6" path="res://resource/scenes/ingame/enemy/EnemyOrigin.tscn" id="3_o8q6f"]
 [ext_resource type="Texture2D" uid="uid://fql0iio1rg7t" path="res://resource/scenes/ingame/BGSpace.png" id="4_88dad"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adv1g"]
@@ -12,10 +13,11 @@ shader_parameter/speed = 0.1
 [node name="InGame" type="CanvasLayer"]
 script = ExtResource("1_tc6hg")
 Ship = ExtResource("2_7qo4k")
+EnemyOrigin = ExtResource("3_o8q6f")
 
 [node name="BgSpace" type="Sprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_adv1g")
-position = Vector2(192, 144)
-scale = Vector2(2, 2)
+position = Vector2(288, 216)
+scale = Vector2(3, 3)
 texture = ExtResource("4_88dad")
