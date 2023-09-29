@@ -21,4 +21,5 @@ texture = ExtResource("1_ow71n")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]

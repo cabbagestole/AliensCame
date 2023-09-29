@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4bm4effngkdy"]
+[gd_scene load_steps=7 format=3 uid="uid://b4bm4effngkdy"]
 
+[ext_resource type="Script" path="res://resource/scenes/ingame/enemy/EnemyBasis.cs" id="1_jpvxo"]
 [ext_resource type="Texture2D" uid="uid://dsne06cv5avra" path="res://resource/scenes/ingame/enemy/FlatwoodsMonster01.png" id="1_qqp0d"]
-[ext_resource type="Script" path="res://resource/scenes/ingame/enemy/EnemyFM.cs" id="1_vgoi6"]
 [ext_resource type="Texture2D" uid="uid://ddkoahy1qgwys" path="res://resource/scenes/ingame/enemy/FlatwoodsMonster02.png" id="2_6wsiv"]
+[ext_resource type="PackedScene" uid="uid://q2cqstiluv5q" path="res://resource/scenes/ingame/explosion/Explosion.tscn" id="4_1wj7k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fsmth"]
 
@@ -21,7 +22,8 @@ animations = [{
 }]
 
 [node name="EnemyFM" type="Area2D"]
-script = ExtResource("1_vgoi6")
+script = ExtResource("1_jpvxo")
+Explosion = ExtResource("4_1wj7k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_fsmth")

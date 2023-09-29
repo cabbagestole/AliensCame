@@ -27,11 +27,24 @@ public partial class Bullet : NotifiableArea2D
 
 	private void OnVisibleOnScreenNotifier2DScreenExited()
 	{
-		GD.Print("Bullet out of screen");
 		QueueFree();
 		notifyObservers();
 	}
+	
+	private void OnAreaEntered(Area2D area)
+	{
+		EnemyBasis enemybasis = area as EnemyBasis;
+		if(null != enemybasis)
+		{
+			enemybasis.Damage(1);
+			notifyObservers();
+			QueueFree();
+		}
+	}
+	
 }
+
+
 
 
 

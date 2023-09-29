@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://q2cqstiluv5q"]
+
+[ext_resource type="Script" path="res://resource/scenes/ingame/explosion/Explosion.cs" id="1_dt7ny"]
+[ext_resource type="Texture2D" uid="uid://f6vukp3q5f02" path="res://resource/scenes/ingame/explosion/EnemyExplosion.png" id="1_ygur3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptpeq"]
+atlas = ExtResource("1_ygur3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvnbd"]
+atlas = ExtResource("1_ygur3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7uud3"]
+atlas = ExtResource("1_ygur3")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpiar"]
+atlas = ExtResource("1_ygur3")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mapag"]
+atlas = ExtResource("1_ygur3")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_612mu"]
+atlas = ExtResource("1_ygur3")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ou3p2"]
+atlas = ExtResource("1_ygur3")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5oxei"]
+atlas = ExtResource("1_ygur3")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bdonq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptpeq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvnbd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7uud3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpiar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mapag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_612mu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ou3p2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5oxei")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource("1_dt7ny")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_bdonq")
+frame = 7
+frame_progress = 1.0
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="OnAnimatedSprite2dAnimationFinished"]
