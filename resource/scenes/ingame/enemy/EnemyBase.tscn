@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpdqd585sbsgs"]
+
+[ext_resource type="Script" path="res://resource/scenes/ingame/enemy/EnemyBase.cs" id="1_5umfi"]
+[ext_resource type="PackedScene" uid="uid://q2cqstiluv5q" path="res://resource/scenes/ingame/explosion/Explosion.tscn" id="2_j5n68"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_duwur"]
+
+[node name="EnemyBase" type="Area2D"]
+script = ExtResource("1_5umfi")
+Explosion = ExtResource("2_j5n68")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_duwur")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 34)
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]

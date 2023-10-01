@@ -1,23 +1,16 @@
 using Godot;
 using System;
 
-public partial class EnemyBasis : NotifiableEnemy
+public partial class EnemyBase : NotifiableEnemy
 {
-
 	[Export] private PackedScene Explosion { get; set; }
-	
 	private Vector2 _screenSize;
-
-	private AnimatedSprite2D _animatedSprite2D;
+	private RayCast2D _rayCast;
 	
 	public override void _Ready()
 	{
 		_screenSize = GetViewportRect().Size;
-
-		_animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		_animatedSprite2D.Animation = "move";
-		_animatedSprite2D.Play();
-		
+		_rayCast = GetNode<RayCast2D>("RayCast2D");
 	}
 
 	public override void _Process(double delta)
@@ -27,14 +20,18 @@ public partial class EnemyBasis : NotifiableEnemy
 			notifyTouchObservers(Direction.West);
 		if(posx < _screenSize.X * (float)0.05)
 			notifyTouchObservers(Direction.East);
+		
+		if(_rayCast.IsColliding()){
+		//	GD.Print(" rat hit = " + Name);
+		}
 	}
-
 
 	private void OnAreaEntered(Area2D area)
 	{
+		GD.Print(" EnemyBase OnAreaEntered = " + Name);
 		if(area.Name == "Ship")
 		{
-			GD.Print(" EnemyBasis touch = " + area.Name);
+			GD.Print(" EnemyBase touch = " + area.Name);
 		}
 	}
 
@@ -55,6 +52,7 @@ public partial class EnemyBasis : NotifiableEnemy
 		explosion.Position = Position;
 		GetParent().AddChild(explosion);
 	}
+
 }
 
 

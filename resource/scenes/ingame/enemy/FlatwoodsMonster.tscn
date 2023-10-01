@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtmwdmm5qw16"]
+
+[ext_resource type="PackedScene" uid="uid://bpdqd585sbsgs" path="res://resource/scenes/ingame/enemy/EnemyBase.tscn" id="1_8yois"]
+[ext_resource type="Script" path="res://resource/scenes/ingame/enemy/FlatwoodsMonster.cs" id="2_6mkar"]
+[ext_resource type="Texture2D" uid="uid://dsne06cv5avra" path="res://resource/scenes/ingame/enemy/FlatwoodsMonster01.png" id="2_afto5"]
+[ext_resource type="Texture2D" uid="uid://ddkoahy1qgwys" path="res://resource/scenes/ingame/enemy/FlatwoodsMonster02.png" id="3_053aw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gutj6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_afto5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_053aw")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[node name="FlatwoodsMonster" instance=ExtResource("1_8yois")]
+script = ExtResource("2_6mkar")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="3"]
+sprite_frames = SubResource("SpriteFrames_gutj6")
+animation = &"move"

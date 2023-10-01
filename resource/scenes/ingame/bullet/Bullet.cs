@@ -33,10 +33,10 @@ public partial class Bullet : NotifiableArea2D
 	
 	private void OnAreaEntered(Area2D area)
 	{
-		EnemyBasis enemybasis = area as EnemyBasis;
-		if(null != enemybasis)
+		EnemyBase enemybasse = area as EnemyBase;
+		if(null != enemybasse)
 		{
-			enemybasis.Damage(1);
+			enemybasse.Damage(1);
 			notifyObservers();
 			QueueFree();
 		}

@@ -4,9 +4,9 @@ using System;
 public partial class EnemyOrigin : Node2D
 {
 
-	[Export] private PackedScene FlatwoodsMonster { get; set; }
-	[Export] private PackedScene Gray { get; set; }
 	[Export] private PackedScene MartianOctopus { get; set; }
+	[Export] private PackedScene Gray { get; set; }
+	[Export] private PackedScene FlatwoodsMonster { get; set; }
 	[Export] public float Speed = 1;
 	
 	private bool _isTouch = false;
@@ -25,8 +25,6 @@ public partial class EnemyOrigin : Node2D
 					generate(FlatwoodsMonster, x, y);
 			}
 		}
-
-		
 	}
 
 	
@@ -47,7 +45,6 @@ public partial class EnemyOrigin : Node2D
 		next.X += x;
 		next.Y += y;
 		Position = next;
-
 	}
 
 	private void generate(PackedScene enemyScene, float x, float y)
@@ -57,14 +54,15 @@ public partial class EnemyOrigin : Node2D
 
 	private void generateImpl(PackedScene enemyScene, float x, float y)
 	{
-		EnemyBasis enemy = (EnemyBasis)enemyScene.Instantiate();
+		EnemyBase enemy = (EnemyBase)enemyScene.Instantiate();
 		enemy.AddTouchObserver(touch);
 		enemy.AddDeathObserver(death);
 		enemy.Position = new Vector2(x, y);
 		AddChild(enemy);
+		_enemyCount++;
 	}
 
-
+	private int _enemyCount = 0;
 	
 	private void touch(Direction direction)
 	{
@@ -72,7 +70,7 @@ public partial class EnemyOrigin : Node2D
 		_isTouch = true;
 	}
 
-	private int _enemyCount = 12;
+
 	private void death()
 	{
 		_enemyCount--;

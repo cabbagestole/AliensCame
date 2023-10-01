@@ -79,7 +79,8 @@ public partial class Main : Node2D
 			AddChild(_inGame);
 
 		}
-		PrintTreePretty();
+//		PrintTreePretty();
+		GD.Print("*** main PrintTreePretty end ***");		
 	}
 	
 }
