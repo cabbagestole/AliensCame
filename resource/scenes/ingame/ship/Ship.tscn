@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://csjsi1fihk2gl"]
+[gd_scene load_steps=18 format=3 uid="uid://csjsi1fihk2gl"]
 
 [ext_resource type="Texture2D" uid="uid://bf7lu7hmnlcds" path="res://resource/scenes/ingame/ship/Ship.png" id="1_1fjcs"]
 [ext_resource type="Script" path="res://resource/scenes/ingame/ship/Ship.cs" id="1_pvqgk"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bl3jsmfjgkpww" path="res://resource/scenes/ingame/ship/Charge.png" id="3_nwvtb"]
 [ext_resource type="AudioStream" uid="uid://bidn3wifp62aq" path="res://resource/sound/SE-ShipBullet.wav" id="6_3cixk"]
 [ext_resource type="AudioStream" uid="uid://gdvmmk0uovdf" path="res://resource/sound/SE-ShipChargeBullet.wav" id="7_aqpqv"]
+[ext_resource type="Texture2D" uid="uid://s63e2bqxquwi" path="res://resource/scenes/ingame/ship/ShipExplosion.png" id="9_pg4ns"]
+[ext_resource type="AudioStream" uid="uid://byd0iouese4pr" path="res://resource/sound/SE-ShipExplosion.wav" id="10_3ycbq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tm2rd"]
 radius = 6.0
@@ -16,6 +18,42 @@ height = 26.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ycrf0"]
 shader = ExtResource("3_1p8v6")
 shader_parameter/fill = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bx23g"]
+atlas = ExtResource("9_pg4ns")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuo1q"]
+atlas = ExtResource("9_pg4ns")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wi8l1"]
+atlas = ExtResource("9_pg4ns")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt3ge"]
+atlas = ExtResource("9_pg4ns")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tuxga"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bx23g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuo1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wi8l1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bt3ge")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Ship" type="Area2D"]
 script = ExtResource("1_pvqgk")
@@ -41,3 +79,15 @@ stream = ExtResource("6_3cixk")
 
 [node name="ChargeBulletSE" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_aqpqv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_tuxga")
+frame = 3
+frame_progress = 1.0
+
+[node name="ShipExplosionSE" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_3ycbq")
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="OnAnimatedSprite2dAnimationFinished"]

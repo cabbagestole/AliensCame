@@ -4,8 +4,11 @@ using System;
 public partial class EnemyBase : NotifiableEnemy
 {
 	[Export] private PackedScene Explosion { get; set; }
+	[Export] private PackedScene EnemyBullet { get; set; }
 	private Vector2 _screenSize;
 	private RayCast2D _rayCast;
+	
+	private GameProperties _GP = GameProperties.Instance();
 	
 	public override void _Ready()
 	{
@@ -20,19 +23,6 @@ public partial class EnemyBase : NotifiableEnemy
 			notifyTouchObservers(Direction.West);
 		if(posx < _screenSize.X * (float)0.05)
 			notifyTouchObservers(Direction.East);
-		
-		if(_rayCast.IsColliding()){
-		//	GD.Print(" rat hit = " + Name);
-		}
-	}
-
-	private void OnAreaEntered(Area2D area)
-	{
-		GD.Print(" EnemyBase OnAreaEntered = " + Name);
-		if(area.Name == "Ship")
-		{
-			GD.Print(" EnemyBase touch = " + area.Name);
-		}
 	}
 
 	private int _hp = 1;
@@ -40,6 +30,7 @@ public partial class EnemyBase : NotifiableEnemy
 	{
 		_hp -= damage;
 		if(_hp <= 0) {
+			_GP.AddScore(Point());
 			explode();
 			notifyDeathObservers();
 			QueueFree();
@@ -52,6 +43,30 @@ public partial class EnemyBase : NotifiableEnemy
 		explosion.Position = Position;
 		GetParent().AddChild(explosion);
 	}
+
+
+	public void Fire()
+	{
+		// 32×32 ドットの敵キャラを48ドット間隔で配置
+		// つまり48-(32/2)=32ドット長のraycastには反応しません。
+		// 前列の空間が空いている敵キャラが弾を撃ちます。
+		if(_rayCast.IsColliding()) return;
+		fireImpl();
+	}
+
+	private void fireImpl()
+	{
+		EnemyBullet enemyBullet = (EnemyBullet)EnemyBullet.Instantiate();
+		EnemyOrigin parent = GetParent() as EnemyOrigin;
+		enemyBullet.Position = parent.Position + Position;
+		GetParent().GetParent().AddChild(enemyBullet);
+	}
+
+	protected virtual int Point()
+	{
+		return 0;
+	}
+
 
 }
 

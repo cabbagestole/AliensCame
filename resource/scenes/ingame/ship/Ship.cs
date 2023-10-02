@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Ship : Area2D
+public partial class Ship : NotifiableArea2D
 {
 	public InputSystem InputSystem { get; set; }
 	[Export] private float Speed = 200;
@@ -14,7 +14,11 @@ public partial class Ship : Area2D
 
 	private AudioStreamPlayer _bulletSE;
 	private AudioStreamPlayer _chargeBulletSE;
+	private AudioStreamPlayer _shipExplosionSE;
+	private AnimatedSprite2D _animatedSprite2D;
 
+	private GameProperties _GP = GameProperties.Instance();
+	
 	public override void _Ready()
 	{
 		InputSystem.AddObserver(fire);
@@ -23,6 +27,11 @@ public partial class Ship : Area2D
 		_charge = (Sprite2D)FindChildren("Charge","Sprite2D")[0];
 		_bulletSE = GetNode<AudioStreamPlayer>("BulletSE");
 		_chargeBulletSE = GetNode<AudioStreamPlayer>("ChargeBulletSE");
+		_shipExplosionSE = GetNode<AudioStreamPlayer>("ShipExplosionSE");
+				
+		_animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		_animatedSprite2D.Animation = "default";
+				
 		Position = new Vector2(_screenSize.X /2, _screenSize.Y *(float)0.9);
 	}
 	
@@ -40,7 +49,7 @@ public partial class Ship : Area2D
 		_move = vec;
 	}
 
-	private float chargeCount = 0;
+	private float _chargeCount = 0;
 
 	private int _bulletCount = 0;
 	
@@ -52,9 +61,8 @@ public partial class Ship : Area2D
 				Bullet bullet = (Bullet)Bullet.Instantiate();
 				bullet.SetPosition(Position);
 				bullet.AddObserver(bulletDestroyed);
-				//bulletをthis(ship)の子ではなくshipの親(InGame)の子する事で
-				// bulletの座標系が移動していないInGmaeの座標系と等しくなる
-				// shipの子にするとInGameから見てShipPos *2 の座標にbulletが配置される為、困る
+				//bulletをthis(ship)の子ではなくshipの親(InGame)の子にする事で
+				// bulletの座標系はあったく移動しないInGmaeの座標系と等しくなります。
 				GetParent().AddChild(bullet);
 				_bulletCount++;
 				_bulletSE.Play();
@@ -62,20 +70,20 @@ public partial class Ship : Area2D
 		}
 		if((button == GUBButton.ButtonSouth) && (state == GUBButtonState.HoldOn))
 		{
-			chargeCount += (float)0.02;
-			_charge.Material.Set("shader_parameter/fill", chargeCount);
+			_chargeCount += (float)0.02;
+			_charge.Material.Set("shader_parameter/fill", _chargeCount);
 		}
 		if((button == GUBButton.ButtonSouth) && (state == GUBButtonState.Release))
 		{
-			if(chargeCount >= 1){
+			if(_chargeCount >= 1){
 				
 				ChargeBullet chargeBullet = (ChargeBullet)ChargeBullet.Instantiate();
 				chargeBullet.SetPosition(Position);
 				GetParent().AddChild(chargeBullet);
 				_chargeBulletSE.Play();
 			}
-			chargeCount = 0;
-			_charge.Material.Set("shader_parameter/fill", chargeCount);
+			_chargeCount = 0;
+			_charge.Material.Set("shader_parameter/fill", _chargeCount);
 		}
 	}
 
@@ -84,12 +92,45 @@ public partial class Ship : Area2D
 		_bulletCount--;
 	}
 
+	private void OnAreaEntered(Area2D area)
+	{
+		EnemyBase enemy = area as EnemyBase;
+		if(null != enemy) 
+			destroy();
+		EnemyBullet eBullet = area as EnemyBullet;
+		if(null != eBullet) 
+			destroy();
+	}
+
+
+	private void destroy()
+	{
+		InputSystem.RemoveObserver(fire);
+		_shipExplosionSE.Play();
+		_animatedSprite2D.Visible = true;
+		_animatedSprite2D.Play();
+	}
+	
+	private void OnAnimatedSprite2dAnimationFinished()
+	{
+		_animatedSprite2D.Visible = false;
+		InputSystem.AddObserver(fire);
+		if(_GP.ShipRest == 0)
+			gameOver();
+		_GP.DecreaseShip();
+	}
+	
 	private void gameOver()
 	{
 		InputSystem.RemoveObserver(fire);
 		InputSystem.RemoveObserver(moveShip);
-//		notifyObservers(GameScene.InGame, GameScene.Title);
+		_move = Vector2.Zero;
+		notifyObservers();
 	}
 	
 	
 }
+
+
+
+

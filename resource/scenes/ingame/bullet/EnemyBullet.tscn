@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://dm888wdem11tc"]
+
+[ext_resource type="Texture2D" uid="uid://cc46llfvkakxw" path="res://resource/scenes/ingame/bullet/EnemyBullet.png" id="1_alnko"]
+[ext_resource type="Script" path="res://resource/scenes/ingame/bullet/EnemyBullet.cs" id="1_im2v2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ytbs7"]
+radius = 4.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8eixk"]
+atlas = ExtResource("1_alnko")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lerq1"]
+atlas = ExtResource("1_alnko")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btubj"]
+atlas = ExtResource("1_alnko")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_431or"]
+atlas = ExtResource("1_alnko")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_trw4x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8eixk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lerq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btubj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_431or")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aufog"]
+emission_shape = 1
+emission_sphere_radius = 6.0
+particle_flag_disable_z = true
+gravity = Vector3(0, -98, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+
+[node name="EnemyBullet" type="Area2D"]
+script = ExtResource("1_im2v2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ytbs7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_trw4x")
+frame_progress = 0.620179
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_aufog")
+trail_enabled = true
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2dScreenExited"]

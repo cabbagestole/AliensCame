@@ -14,3 +14,13 @@ Title = ExtResource("3_sml78")
 Control = ExtResource("4_qap0w")
 InGame = ExtResource("5_xrmid")
 Stub = ExtResource("3_i1hp3")
+
+[node name="InGameFreeTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="InGameStartTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="InGameFreeTimer" to="." method="OnFreeInGame"]
+[connection signal="timeout" from="InGameStartTimer" to="." method="OnGenerateInGame"]

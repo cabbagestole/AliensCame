@@ -40,6 +40,7 @@ public enum GameScene
 	Title = 1,
 	Control = 2,
 	InGame = 3,
+	GameOver = 4,
 }
 
 public enum Direction{

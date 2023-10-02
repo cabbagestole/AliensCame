@@ -10,3 +10,8 @@ script = ExtResource("1_wbpyq")
 MartianOctopus = ExtResource("2_o3wue")
 Gray = ExtResource("3_e12fj")
 FlatwoodsMonster = ExtResource("2_kje6w")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

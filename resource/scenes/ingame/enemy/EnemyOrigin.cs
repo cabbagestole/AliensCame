@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class EnemyOrigin : Node2D
+public partial class EnemyOrigin : NotifiableNode2D
 {
 
 	[Export] private PackedScene MartianOctopus { get; set; }
@@ -11,6 +11,7 @@ public partial class EnemyOrigin : Node2D
 	
 	private bool _isTouch = false;
 	private Direction _direction = Direction.East;
+	private Timer _timer;
 	
 	public override void _Ready()
 	{
@@ -25,6 +26,9 @@ public partial class EnemyOrigin : Node2D
 					generate(FlatwoodsMonster, x, y);
 			}
 		}
+		_timer = GetNode<Timer>("Timer");
+		_timer.Start(2);
+
 	}
 
 	
@@ -75,7 +79,20 @@ public partial class EnemyOrigin : Node2D
 	{
 		_enemyCount--;
 		if(0 >= _enemyCount)
-			GD.Print("destory them all");
+			notifyObservers();
 	}
 
+	private void OnTimerTimeout()
+	{
+		int count = GetChildCount() -1;//EnemyBaseの子ノードTimerの分を -1し、Enemybaseの数を得る
+		if(0 < count) {
+			EnemyBase enemy = GetChild((int)GD.Randi() % count) as EnemyBase;
+			enemy?.Fire();
+			_timer.Start(1);
+		}
+	}
+
+
 }
+
+

@@ -21,3 +21,61 @@ material = SubResource("ShaderMaterial_adv1g")
 position = Vector2(288, 216)
 scale = Vector2(3, 3)
 texture = ExtResource("4_88dad")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Wave"
+
+[node name="Wave" type="Label" parent="."]
+offset_left = 51.0
+offset_top = 1.0
+offset_right = 91.0
+offset_bottom = 24.0
+text = "0"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 95.0
+offset_top = 1.0
+offset_right = 138.0
+offset_bottom = 27.0
+text = "Score"
+
+[node name="Score" type="Label" parent="."]
+offset_left = 148.0
+offset_top = 1.0
+offset_right = 229.0
+offset_bottom = 27.0
+text = "0"
+horizontal_alignment = 2
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 274.0
+offset_right = 314.0
+offset_bottom = 26.0
+text = "Hi-"
+
+[node name="HiScore" type="Label" parent="."]
+offset_left = 313.0
+offset_top = 2.0
+offset_right = 392.0
+offset_bottom = 28.0
+text = "0"
+horizontal_alignment = 2
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 443.0
+offset_right = 483.0
+offset_bottom = 26.0
+text = "Rest"
+
+[node name="ShipRest" type="Label" parent="."]
+offset_left = 503.0
+offset_top = 1.0
+offset_right = 543.0
+offset_bottom = 27.0
+text = "0"
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]
