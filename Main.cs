@@ -8,14 +8,18 @@ public partial class Main : Node2D
 	[Export] private PackedScene Title { get; set; }
 	[Export] private PackedScene Control { get; set; }
 	[Export] private PackedScene InGame { get; set; }
-	[Export] private PackedScene Stub { get; set; }
+	[Export] private PackedScene Credit { get; set; }
+	[Export] private PackedScene GameOver { get; set; }
 
 	private InputSystem _inputSystem;
 	private Title _title;
 	private Control _control;
 	private InGame _inGame;
+	private Credit _credit;
+	private GameOver _gameOver;
 	
-	private GameProperties _gameProperties = GameProperties.Instance();
+	
+	private GameProperties _GP = GameProperties.Instance();
 	
 	public override void _Ready()
 	{
@@ -28,7 +32,6 @@ public partial class Main : Node2D
 	{
 		if(GameScene.Title == currnt){
 			RemoveChild(_title);
-			_title = null;
 		}
 		if(GameScene.Title == next){
 			_title = (Title)Title.Instantiate();
@@ -39,7 +42,7 @@ public partial class Main : Node2D
 
 		if(GameScene.Control == currnt){
 			RemoveChild(_control);
-			_control = null;
+			_GP.Setup();
 		}
 		if(GameScene.Control == next){
 			_control = (Control)Control.Instantiate();
@@ -48,18 +51,36 @@ public partial class Main : Node2D
 			AddChild(_control);
 		}
 
-		if(GameScene.InGame == currnt){
-			GetNode<Timer>("InGameFreeTimer").Start();
-//			EmitSignal(SignalName.FreeInGame);
+		if(GameScene.Credit == currnt){
+			RemoveChild(_credit);
+		}
+		if(GameScene.Credit == next){
+			_credit = (Credit)Credit.Instantiate();
+			_credit.InputSystem = _inputSystem;
+			_credit.AddObserver(sceneChange);
+			AddChild(_credit);
 		}
 
-		if(GameScene.InGame == next){
-			GetNode<Timer>("InGameStartTimer").Start();
-//			EmitSignal(SignalName.GenerateInGame);
+		if(GameScene.GameOver == currnt){
+			RemoveChild(_gameOver);
 		}
-//		PrintTreePretty();
+		if(GameScene.GameOver == next){
+			_gameOver = (GameOver)GameOver.Instantiate();
+			_gameOver.InputSystem = _inputSystem;
+			_gameOver.AddObserver(sceneChange);
+			AddChild(_gameOver);
+		}
+
+
+		if(GameScene.InGame == currnt)
+			GetNode<Timer>("InGameFreeTimer").Start();
+		if(GameScene.InGame == next)
+			GetNode<Timer>("InGameStartTimer").Start();
+
 	}
 	
+
+
 
 	private void OnFreeInGame()
 	{

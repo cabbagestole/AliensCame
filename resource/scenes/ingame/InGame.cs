@@ -12,8 +12,6 @@ public partial class InGame : NotifiableCanvasLayer
 		
 	public override void _Ready()
 	{
-		if(_GP.Wave == 0) 
-			_GP.Setup();
 		_GP.IncreaseWave();
 
 		Ship ship = (Ship)Ship.Instantiate();
@@ -25,12 +23,10 @@ public partial class InGame : NotifiableCanvasLayer
 		enemyorigin.AddObserver(destroyEnemyAll);
 		AddChild(enemyorigin);
 		
-		OnTimerTimeout();
-		GetNode<Timer>("Timer").Start();
 	}
 
 
-	private void OnTimerTimeout()
+	public override void _Process(double delta)
 	{
 		GetNode<Label>("Wave").Text = _GP.Wave.ToString();
 		GetNode<Label>("Score").Text = _GP.Score.ToString();
@@ -40,13 +36,16 @@ public partial class InGame : NotifiableCanvasLayer
 
 	public void loseAllShip()
 	{
-		GD.Print("loseAllShip");
-		notifyObservers(GameScene.InGame, GameScene.Title);
+		notifyObservers(GameScene.InGame, GameScene.GameOver);
+	}
+
+	public void invade()
+	{
+		notifyObservers(GameScene.InGame, GameScene.GameOver);
 	}
 
 	public void destroyEnemyAll()
 	{
-		GD.Print("destroyEnemyAll");
 		notifyObservers(GameScene.InGame, GameScene.InGame);
 	}
 	

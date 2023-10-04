@@ -3,31 +3,37 @@ using System;
 
 public partial class Title : NotifiableCanvasLayer
 {
-	 public InputSystem InputSystem { get; set; }
+	public InputSystem InputSystem { get; set; }
 
 	private int _select = 0;
-	private Sprite2D _startLabel;
-	private Sprite2D _operationLabel;
+	private Sprite2D _startSprite;
+	private Sprite2D _operationSprite;
+	private Sprite2D _creditSprite;
 	private AudioStreamPlayer _click;
-			
+
+	private GameProperties _GP = GameProperties.Instance();
+
 	public override void _Ready()
 	{
 		InputSystem.AddObserver(buttonCheck);
 		InputSystem.AddObserver(moveCursor, true);
-		_startLabel = (Sprite2D)FindChildren("Selector01","Sprite2D")[0];
-		_operationLabel = (Sprite2D)FindChildren("Selector02","Sprite2D")[0];
-		_startLabel.Visible = true;
-		_operationLabel.Visible = false;
+		_startSprite = (Sprite2D)FindChildren("Selector01","Sprite2D")[0];
+		_operationSprite = (Sprite2D)FindChildren("Selector02","Sprite2D")[0];
+		_creditSprite = (Sprite2D)FindChildren("Selector03","Sprite2D")[0];
+		_startSprite.Visible = true;
+		_operationSprite.Visible = false;
+		_creditSprite.Visible = false;
 		_click = GetNode<AudioStreamPlayer>("Click");
-		
+		_GP.Setup();
 	}
 	
 
 	private void moveCursor(Vector2 vec)
 	{
-		_select = regurate(_select, vec.Y, 2);
-		_startLabel.Visible = (0 == _select)? true: false;
-		_operationLabel.Visible = (1 == _select)? true: false;
+		_select = regurate(_select, vec.Y, 3);
+		_startSprite.Visible = (0 == _select)? true: false;
+		_operationSprite.Visible = (1 == _select)? true: false;
+		_creditSprite.Visible = (2 == _select)? true: false;
 		_click.Play();
 	}
 
@@ -48,10 +54,16 @@ public partial class Title : NotifiableCanvasLayer
 	{
 		if((button == GUBButton.ButtonSouth) && (state == GUBButtonState.Press))
 		{
-			if(0 == _select){
-				notifyObservers(GameScene.Title, GameScene.InGame);
-			}else{
-				notifyObservers(GameScene.Title, GameScene.Control);
+			switch(_select){
+				case 0:
+					notifyObservers(GameScene.Title, GameScene.InGame);
+					break;
+				case 1:
+					notifyObservers(GameScene.Title, GameScene.Control);
+					break;
+				case 2:
+					notifyObservers(GameScene.Title, GameScene.Credit);
+					break;
 			}
 			InputSystem.RemoveObserver(buttonCheck);
 			InputSystem.RemoveObserver(moveCursor);

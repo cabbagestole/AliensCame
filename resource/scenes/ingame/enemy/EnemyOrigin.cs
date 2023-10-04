@@ -12,6 +12,7 @@ public partial class EnemyOrigin : NotifiableNode2D
 	private bool _isTouch = false;
 	private Direction _direction = Direction.East;
 	private Timer _timer;
+	private int _enemyCount = 0;
 	
 	public override void _Ready()
 	{
@@ -36,10 +37,11 @@ public partial class EnemyOrigin : NotifiableNode2D
 	{
 		float x = 0;
 		float y = 0;
+		float ratio = 1 / Mathf.Sqrt(_enemyCount +1);
 		if(_direction == Direction.East) {
-			x = Speed;
+			x = Speed * ratio;
 		} else {
-			x = -Speed;
+			x = -Speed * ratio;
 		}
 		if(_isTouch){
 			y = 16;
@@ -61,12 +63,12 @@ public partial class EnemyOrigin : NotifiableNode2D
 		EnemyBase enemy = (EnemyBase)enemyScene.Instantiate();
 		enemy.AddTouchObserver(touch);
 		enemy.AddDeathObserver(death);
+		enemy.AddInvadeObserver(invade);
 		enemy.Position = new Vector2(x, y);
 		AddChild(enemy);
 		_enemyCount++;
 	}
 
-	private int _enemyCount = 0;
 	
 	private void touch(Direction direction)
 	{
@@ -82,10 +84,20 @@ public partial class EnemyOrigin : NotifiableNode2D
 			notifyObservers();
 	}
 
+	private bool isNotify = false;
+	private void invade()
+	{
+		if(isNotify) return;
+		isNotify = true;
+		InGame parent = (InGame)GetParent();
+		parent.invade();
+	}
+
+
 	private void OnTimerTimeout()
 	{
 		int count = GetChildCount() -1;//EnemyBaseの子ノードTimerの分を -1し、Enemybaseの数を得る
-		if(0 < count) {
+		if(0 <= count) {
 			EnemyBase enemy = GetChild((int)GD.Randi() % count) as EnemyBase;
 			enemy?.Fire();
 			_timer.Start(1);

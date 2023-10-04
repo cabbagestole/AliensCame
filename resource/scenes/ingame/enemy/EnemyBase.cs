@@ -7,22 +7,26 @@ public partial class EnemyBase : NotifiableEnemy
 	[Export] private PackedScene EnemyBullet { get; set; }
 	private Vector2 _screenSize;
 	private RayCast2D _rayCast;
-	
+	private AudioStreamPlayer _enemyBulletSE;
+		
 	private GameProperties _GP = GameProperties.Instance();
 	
 	public override void _Ready()
 	{
 		_screenSize = GetViewportRect().Size;
+		_enemyBulletSE = GetNode<AudioStreamPlayer>("EnemyBulletSE");
 		_rayCast = GetNode<RayCast2D>("RayCast2D");
 	}
 
 	public override void _Process(double delta)
 	{
-		float posx = GetParent<Node2D>().Position.X + Position.X;
-		if(posx > _screenSize.X * (float)0.95)
+		Vector2 pos = GetParent<Node2D>().Position + Position;
+		if(pos.X > _screenSize.X * (float)0.95)
 			notifyTouchObservers(Direction.West);
-		if(posx < _screenSize.X * (float)0.05)
+		if(pos.X < _screenSize.X * (float)0.05)
 			notifyTouchObservers(Direction.East);
+		if(pos.Y > _screenSize.Y * (float)0.95)
+			notifyInvadeObservers();
 	}
 
 	private int _hp = 1;
@@ -56,6 +60,7 @@ public partial class EnemyBase : NotifiableEnemy
 
 	private void fireImpl()
 	{
+		_enemyBulletSE.Play();
 		EnemyBullet enemyBullet = (EnemyBullet)EnemyBullet.Instantiate();
 		EnemyOrigin parent = GetParent() as EnemyOrigin;
 		enemyBullet.Position = parent.Position + Position;
@@ -64,7 +69,7 @@ public partial class EnemyBase : NotifiableEnemy
 
 	protected virtual int Point()
 	{
-		return 0;
+		return 0;//派生先で点数をオーバーライドしてください
 	}
 
 

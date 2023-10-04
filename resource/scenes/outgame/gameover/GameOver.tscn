@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c80shrrv3ku38"]
+
+[ext_resource type="Script" path="res://resource/scenes/outgame/gameover/GameOver.cs" id="1_ijd5n"]
+[ext_resource type="Texture2D" uid="uid://b68bu558htq52" path="res://resource/scenes/outgame/gameover/GameOver.png" id="2_xivck"]
+
+[node name="GameOver" type="CanvasLayer"]
+script = ExtResource("1_ijd5n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(288, 216)
+scale = Vector2(3, 3)
+texture = ExtResource("2_xivck")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 229.0
+offset_top = 367.0
+offset_right = 380.0
+offset_bottom = 393.0
+text = "push button to title"
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

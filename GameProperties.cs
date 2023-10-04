@@ -26,6 +26,7 @@ public class GameProperties
 	{
 		_score = 0;
 		_shipRest = 3;
+		_wave = 0;
 	}
 
 	public int Score

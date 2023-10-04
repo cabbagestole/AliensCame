@@ -41,6 +41,7 @@ public enum GameScene
 	Control = 2,
 	InGame = 3,
 	GameOver = 4,
+	Credit = 5,
 }
 
 public enum Direction{

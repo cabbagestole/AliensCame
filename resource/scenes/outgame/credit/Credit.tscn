@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://cc21uvvlxrv71"]
+
+[ext_resource type="Script" path="res://resource/scenes/outgame/credit/Credit.cs" id="1_0ndqm"]
+[ext_resource type="JSON" path="res://resource/scenes/outgame/credit/credit.json" id="2_1bulw"]
+[ext_resource type="PackedScene" uid="uid://cy5gadm3s0yvp" path="res://resource/scenes/outgame/credit/movingtext/MovingText.tscn" id="3_thgm4"]
+[ext_resource type="AudioStream" uid="uid://binhv8dcqqw7p" path="res://resource/sound/BGM-credit.wav" id="4_eddau"]
+
+[node name="Credit" type="CanvasLayer"]
+script = ExtResource("1_0ndqm")
+Text = ExtResource("2_1bulw")
+MovingText = ExtResource("3_thgm4")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_eddau")
+
+[connection signal="finished" from="AudioStreamPlayer" to="." method="OnAudioStreamPlayerFinished"]

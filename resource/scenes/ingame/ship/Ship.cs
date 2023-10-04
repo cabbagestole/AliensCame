@@ -39,8 +39,8 @@ public partial class Ship : NotifiableArea2D
 	{
 		Position += _move * (float)delta * Speed;
 		Position = new Vector2(
-			x: Mathf.Clamp(Position.X, _screenSize.X * (float)0.1, _screenSize.X * (float)0.9),
-			y: Mathf.Clamp(Position.Y, _screenSize.Y * (float)0.1, _screenSize.Y * (float)0.9)
+			x: Mathf.Clamp(Position.X, _screenSize.X * (float)0.05, _screenSize.X * (float)0.95),
+			y: Mathf.Clamp(Position.Y, _screenSize.Y * (float)0.05, _screenSize.Y * (float)0.95)
 		);
 	}
 
