@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfci1apyjpiae"]
+[gd_scene load_steps=9 format=3 uid="uid://cfci1apyjpiae"]
 
 [ext_resource type="Script" path="res://resource/scenes/ingame/InGame.cs" id="1_tc6hg"]
 [ext_resource type="Shader" path="res://resource/scenes/ingame/InGame.gdshader" id="2_2thkk"]
 [ext_resource type="PackedScene" uid="uid://csjsi1fihk2gl" path="res://resource/scenes/ingame/ship/Ship.tscn" id="2_7qo4k"]
 [ext_resource type="PackedScene" uid="uid://c2rrk6030mig6" path="res://resource/scenes/ingame/enemy/EnemyOrigin.tscn" id="3_o8q6f"]
 [ext_resource type="Texture2D" uid="uid://fql0iio1rg7t" path="res://resource/scenes/ingame/BGSpace.png" id="4_88dad"]
+[ext_resource type="PackedScene" uid="uid://u1rf5opsmn76" path="res://resource/scenes/util/AudioStreamRepeatPlayer.tscn" id="6_ei7ut"]
+[ext_resource type="AudioStream" uid="uid://cq56fti5prhco" path="res://resource/sound/BGM-ingame.wav" id="7_qgtep"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adv1g"]
 shader = ExtResource("2_2thkk")
@@ -75,3 +77,14 @@ offset_top = 1.0
 offset_right = 543.0
 offset_bottom = 27.0
 text = "0"
+
+[node name="GameOverTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="WaveClearTimer" type="Timer" parent="."]
+
+[node name="AudioStreamRepeatPlayer" parent="." instance=ExtResource("6_ei7ut")]
+stream = ExtResource("7_qgtep")
+
+[connection signal="timeout" from="GameOverTimer" to="." method="OnGameOverTimerTimeout"]
+[connection signal="timeout" from="WaveClearTimer" to="." method="OnWaveClearTimerTimeout"]

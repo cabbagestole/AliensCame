@@ -9,7 +9,7 @@ public partial class EnemyBase : NotifiableEnemy
 	private RayCast2D _rayCast;
 	private AudioStreamPlayer _enemyBulletSE;
 		
-	private GameProperties _GP = GameProperties.Instance();
+	private GameProperties _GP = GameProperties.Inst();
 	
 	public override void _Ready()
 	{

@@ -10,8 +10,9 @@ public partial class Title : NotifiableCanvasLayer
 	private Sprite2D _operationSprite;
 	private Sprite2D _creditSprite;
 	private AudioStreamPlayer _click;
+	private AudioStreamPlayer _titleBGM;
 
-	private GameProperties _GP = GameProperties.Instance();
+	private GameProperties _GP = GameProperties.Inst();
 
 	public override void _Ready()
 	{
@@ -24,6 +25,7 @@ public partial class Title : NotifiableCanvasLayer
 		_operationSprite.Visible = false;
 		_creditSprite.Visible = false;
 		_click = GetNode<AudioStreamPlayer>("Click");
+		GetNode<AudioStreamRepeatPlayer>("AudioStreamRepeatPlayer").Play();
 		_GP.Setup();
 	}
 	
@@ -59,12 +61,13 @@ public partial class Title : NotifiableCanvasLayer
 					notifyObservers(GameScene.Title, GameScene.InGame);
 					break;
 				case 1:
-					notifyObservers(GameScene.Title, GameScene.Control);
+					notifyObservers(GameScene.Title, GameScene.Operation);
 					break;
 				case 2:
 					notifyObservers(GameScene.Title, GameScene.Credit);
 					break;
 			}
+			GetNode<AudioStreamRepeatPlayer>("AudioStreamRepeatPlayer").Stop();
 			InputSystem.RemoveObserver(buttonCheck);
 			InputSystem.RemoveObserver(moveCursor);
 		}
@@ -72,3 +75,5 @@ public partial class Title : NotifiableCanvasLayer
 	
 
 }
+
+

@@ -17,7 +17,7 @@ public class GameProperties
 	}
 
 
-	public static GameProperties Instance()
+	public static GameProperties Inst()
 	{
 		return _self ??= new GameProperties();
 	}

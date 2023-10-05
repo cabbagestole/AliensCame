@@ -10,6 +10,11 @@ public partial class NotifiableCanvasLayer : CanvasLayer
 		_sceneChangeObserver+= callback;
 	}
 	
+	public void RemoveObserver(Action<GameScene, GameScene> callback)
+	{
+		_sceneChangeObserver-= callback;
+	}
+	
 	protected void notifyObservers(GameScene current, GameScene next)
 	{
 		_sceneChangeObserver?.Invoke(current, next);

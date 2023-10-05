@@ -17,7 +17,7 @@ public partial class Ship : NotifiableArea2D
 	private AudioStreamPlayer _shipExplosionSE;
 	private AnimatedSprite2D _animatedSprite2D;
 
-	private GameProperties _GP = GameProperties.Instance();
+	private GameProperties _GP = GameProperties.Inst();
 	
 	public override void _Ready()
 	{
@@ -116,18 +116,18 @@ public partial class Ship : NotifiableArea2D
 		_animatedSprite2D.Visible = false;
 		InputSystem.AddObserver(fire);
 		if(_GP.ShipRest == 0)
-			gameOver();
+			notifyObservers();
 		_GP.DecreaseShip();
 	}
 	
-	private void gameOver()
+	
+	public void stopMoving()
 	{
 		InputSystem.RemoveObserver(fire);
 		InputSystem.RemoveObserver(moveShip);
 		_move = Vector2.Zero;
-		notifyObservers();
 	}
-	
+
 	
 }
 

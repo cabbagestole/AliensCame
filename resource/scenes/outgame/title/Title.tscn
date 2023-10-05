@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cq6o4tkox5y4y"]
+[gd_scene load_steps=7 format=3 uid="uid://cq6o4tkox5y4y"]
 
 [ext_resource type="Script" path="res://resource/scenes/outgame/title/Title.cs" id="1_onj8p"]
 [ext_resource type="Texture2D" uid="uid://djacnt2p8avfx" path="res://resource/scenes/outgame/title/Title.png" id="1_xpma6"]
 [ext_resource type="Texture2D" uid="uid://cfl3qqrlfcp13" path="res://resource/scenes/outgame/title/Selector.png" id="3_4lvsn"]
 [ext_resource type="AudioStream" uid="uid://dcwjhifigy0c8" path="res://resource/sound/SE-Click.wav" id="5_0hy6w"]
+[ext_resource type="AudioStream" uid="uid://deervor6g8gkf" path="res://resource/sound/BGM-title.wav" id="5_1ypqp"]
+[ext_resource type="PackedScene" uid="uid://u1rf5opsmn76" path="res://resource/scenes/util/AudioStreamRepeatPlayer.tscn" id="5_s8hl3"]
 
 [node name="Title" type="CanvasLayer"]
 script = ExtResource("1_onj8p")
@@ -14,38 +16,20 @@ position = Vector2(288, 216)
 scale = Vector2(3, 3)
 texture = ExtResource("1_xpma6")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 274.0
-offset_top = 162.0
-offset_right = 314.0
-offset_bottom = 188.0
-text = "start"
-
-[node name="Label2" type="Label" parent="."]
-offset_left = 250.0
-offset_top = 234.0
-offset_right = 326.0
-offset_bottom = 260.0
-text = "operation"
-
-[node name="Label3" type="Label" parent="."]
-offset_left = 265.0
-offset_top = 326.0
-offset_right = 305.0
-offset_bottom = 349.0
-text = "credit"
-
 [node name="Selector01" type="Sprite2D" parent="."]
-position = Vector2(288, 172)
+position = Vector2(288, 170)
 texture = ExtResource("3_4lvsn")
 
 [node name="Selector02" type="Sprite2D" parent="."]
-position = Vector2(289, 246)
+position = Vector2(289, 261)
 texture = ExtResource("3_4lvsn")
 
 [node name="Selector03" type="Sprite2D" parent="."]
-position = Vector2(288, 338)
+position = Vector2(288, 348)
 texture = ExtResource("3_4lvsn")
 
 [node name="Click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_0hy6w")
+
+[node name="AudioStreamRepeatPlayer" parent="." instance=ExtResource("5_s8hl3")]
+stream = ExtResource("5_1ypqp")

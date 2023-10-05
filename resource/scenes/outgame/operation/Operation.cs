@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Control : NotifiableCanvasLayer
+public partial class Operation : NotifiableCanvasLayer
 {
 	public InputSystem InputSystem { get; set; }
 
@@ -14,7 +14,7 @@ public partial class Control : NotifiableCanvasLayer
 	{
 		if((button == GUBButton.ButtonSouth) && (state == GUBButtonState.Press))
 		{
-			notifyObservers(GameScene.Control, GameScene.Title);
+			notifyObservers(GameScene.Operation, GameScene.Title);
 			InputSystem.RemoveObserver(buttonCheck);
 		}
 	}

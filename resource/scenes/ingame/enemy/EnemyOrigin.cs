@@ -32,9 +32,16 @@ public partial class EnemyOrigin : NotifiableNode2D
 
 	}
 
-	
+	private bool isStop = false;
+	public void stopMoving()
+	{
+		isStop = true;
+	}
+
+
 	public override void _Process(double delta)
 	{
+		if(isStop) return;
 		float x = 0;
 		float y = 0;
 		float ratio = 1 / Mathf.Sqrt(_enemyCount +1);
@@ -89,18 +96,19 @@ public partial class EnemyOrigin : NotifiableNode2D
 	{
 		if(isNotify) return;
 		isNotify = true;
-		InGame parent = (InGame)GetParent();
+		InGame parent = (InGame)GetParent();// Not good. Jumper lines that I write because I know my parents are InGame. 
 		parent.invade();
 	}
 
 
 	private void OnTimerTimeout()
 	{
+		if(isStop) return;
 		int count = GetChildCount() -1;//EnemyBaseの子ノードTimerの分を -1し、Enemybaseの数を得る
 		if(0 <= count) {
 			EnemyBase enemy = GetChild((int)GD.Randi() % count) as EnemyBase;
 			enemy?.Fire();
-			_timer.Start(1);
+			_timer.Start();
 		}
 	}
 

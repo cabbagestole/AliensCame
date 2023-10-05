@@ -3,19 +3,19 @@
 [ext_resource type="Script" path="res://Main.cs" id="1_lrqrl"]
 [ext_resource type="PackedScene" uid="uid://bq8474fl8rdq" path="res://resource/scenes/util/InputSystem.tscn" id="2_wjdnk"]
 [ext_resource type="PackedScene" uid="uid://cq6o4tkox5y4y" path="res://resource/scenes/outgame/title/Title.tscn" id="3_sml78"]
-[ext_resource type="PackedScene" uid="uid://drvyvuajpqhh3" path="res://resource/scenes/outgame/control/Control.tscn" id="4_qap0w"]
+[ext_resource type="PackedScene" uid="uid://drvyvuajpqhh3" path="res://resource/scenes/outgame/operation/Operation.tscn" id="4_qap0w"]
 [ext_resource type="PackedScene" uid="uid://cfci1apyjpiae" path="res://resource/scenes/ingame/InGame.tscn" id="5_xrmid"]
 [ext_resource type="PackedScene" uid="uid://cc21uvvlxrv71" path="res://resource/scenes/outgame/credit/Credit.tscn" id="6_ca87d"]
 [ext_resource type="PackedScene" uid="uid://c80shrrv3ku38" path="res://resource/scenes/outgame/gameover/GameOver.tscn" id="7_xj5l1"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node"]
 script = ExtResource("1_lrqrl")
-InputSystem = ExtResource("2_wjdnk")
-Title = ExtResource("3_sml78")
-Control = ExtResource("4_qap0w")
-InGame = ExtResource("5_xrmid")
-Credit = ExtResource("6_ca87d")
-GameOver = ExtResource("7_xj5l1")
+InputSystemPrefab = ExtResource("2_wjdnk")
+TitlePrefab = ExtResource("3_sml78")
+OperationPrefab = ExtResource("4_qap0w")
+InGamePrefab = ExtResource("5_xrmid")
+CreditPrefab = ExtResource("6_ca87d")
+GameOverPrefab = ExtResource("7_xj5l1")
 
 [node name="InGameFreeTimer" type="Timer" parent="."]
 wait_time = 0.1

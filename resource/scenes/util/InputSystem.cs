@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+// note
 // Handmade device input handler
 // 
 // Keyboard and gamepad button wrappers.
@@ -12,9 +13,33 @@ using System;
 // Not necessary to configure [project]-[project setting]-[input map].
 // The inspection target is hard-coded within the class.
 //
-// [note]
-// prefix of "GUB" is Godot to Unity-taste Bridge symbols, defined in Const.cs.
 //
+
+///////////////////////////
+// prefix "GUB" is 
+// Godot to Unity-taste Bredge symbols.
+//
+// Enum for InputSystem
+//
+// joypad button
+public enum GUBButton
+{
+	ButtonNorth = 0,
+	ButtonSouth = 1,
+	ButtonEast = 2,
+	ButtonWest = 3,
+}
+
+
+// joypad button state
+public enum GUBButtonState
+{
+	Press = 0,
+	HoldOn = 1,
+	Release = 2,
+}
+
+
 public partial class InputSystem : Node
 {
 	// Threshold for ignoring micro-movements of the stick

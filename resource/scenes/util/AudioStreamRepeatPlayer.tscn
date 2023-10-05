@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://u1rf5opsmn76"]
+
+[ext_resource type="Script" path="res://resource/scenes/util/AudioStreamRepeatPlayer.cs" id="1_aov0u"]
+
+[node name="AudioStreamRepeatPlayer" type="AudioStreamPlayer"]
+script = ExtResource("1_aov0u")
+
+[connection signal="finished" from="." to="." method="OnFinished"]

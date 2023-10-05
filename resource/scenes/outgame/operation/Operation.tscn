@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://drvyvuajpqhh3"]
+
+[ext_resource type="Script" path="res://resource/scenes/outgame/operation/Operation.cs" id="1_olmrt"]
+[ext_resource type="Texture2D" uid="uid://drx02dd7q2mbf" path="res://resource/scenes/outgame/operation/Operation.png" id="2_xl0ok"]
+
+[node name="Control" type="CanvasLayer"]
+script = ExtResource("1_olmrt")
+
+[node name="Control" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(288, 216)
+scale = Vector2(3, 3)
+texture = ExtResource("2_xl0ok")

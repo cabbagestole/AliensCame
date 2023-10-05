@@ -8,14 +8,11 @@ public partial class Credit : NotifiableCanvasLayer
 
 	public InputSystem InputSystem { get; set; }
 
-	private AudioStreamPlayer _creditBGM;
-		
 	public override void _Ready()
 	{
 		startCredit();
 		InputSystem.AddObserver(buttonCheck);
-		_creditBGM = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
-	//	_creditBGM.Play();
+		GetNode<AudioStreamRepeatPlayer>("AudioStreamRepeatPlayer").Play();
 	}
 	
 	private void startCredit()
@@ -40,16 +37,12 @@ public partial class Credit : NotifiableCanvasLayer
 	{
 		if((button == GUBButton.ButtonSouth) && (state == GUBButtonState.Press))
 		{
+			GetNode<AudioStreamRepeatPlayer>("AudioStreamRepeatPlayer").Stop();
 			InputSystem.RemoveObserver(buttonCheck);
-			_creditBGM.Stop();
 			notifyObservers(GameScene.Credit, GameScene.Title);
 		}
 	}
 
-	private void OnAudioStreamPlayerFinished()
-	{
-	//	_creditBGM.Play();
-	}
 
 }
 
