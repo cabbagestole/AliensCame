@@ -5,3 +5,18 @@ Still in production. I will add a readme when it is completed.
 
 シンプルなインベーダーゲームをGodot4.1とC#で作る練習です。
 まだ開発中です。完成したらreadmeも追記します。
+
+
+# UNDERCONSTRUCTION
+
+## OutGame
+### scene contoroller (Main.cs)
+### Handmade InputSystem (resource/scene/util/InputSystem)
+### Singleton(Gameproperties)
+### Json-format File I/O(resource/scenes/outgame/credit/Credit)
+
+## InGame
+### Observer pattern (anyware Notifiable*.cs)
+### Abstruct class (/resource/scenes/ingame/enemy/EnemyBase)
+### Concrate class (/resource/scenes/ingame/enemy/FlatwoodsMonster, Gray, MartianOctopus)
+### Shader Controll (/resource/scenes/ingame/ship/Charge)
