@@ -1,11 +1,12 @@
 {
+	"0":"Development Tools",
 	"1":"Game Engine",
 	"2":"Godot Engine v4.1.1.stable.mono.official [bd6af8e0e]",
 
 	"4":"Programing Language",
 	"5":"C# .NET SDK: 7.0.302 [990cf98a27]",
 
-	"7":"Splite",
+	"7":"Splite Editor",
 	"8":"Edge   https://takabosoft.com/edge",
 
 	"10":"DAW",
@@ -16,42 +17,50 @@
 	"15":"SE",
 	"16":"Bfxr   https://www.bfxr.net/",
 
-	"18":"BGM Inspiered by",
-	"19":"Twilight Tone   / Manhattan Transfer",
-	"20":"Twilight Zone   / 2 UNLIMITED",
-	"21":"Twilight   / Electric Light Orchestra",
-
-	"23":"Game Inspiered by",
-	"24":"SPACE INVADERS   / TAITO",
-
-	"26":"Producer",
-	"27":"Director",
-	"28":"Planner",
-	"29":"Programmer",
-	"30":"Scripter",
-	"31":"Debugger",
-	"32":"Sound Creator",
-	"33":"Designer",
-	"34":"cabbage   @cabbagestole",
+	"17":"Icon",
+	"18":"Quick_Any2Ico   https://www.carifred.com/quick_any2ico/",
 
 
-	"39":"License",
+	"20":"Inspiered",
+	"21":"BGM Inspiered by",
+	"22":"Twilight Tone   / Manhattan Transfer",
+	"22":"Twilight Zone   / 2 UNLIMITED",
+	"23":"Twilight   / Electric Light Orchestra",
 
-	"41":"Godot",
-	"42":"https://godotengine.org/license/",
+	"25":"Game Inspiered by",
+	"26":"SPACE INVADERS   / TAITO",
 
-	"44":"Font",
-	"45":"Portions of this software are copyright © <1996-2022>",
-	"46":"The FreeType Project (www.freetype.org). All rights reserved.",
+	"28":"Producer",
+	"29":"Director",
+	"30":"Planner",
+	"31":"Programmer",
+	"32":"Scripter",
+	"33":"Debugger",
+	"34":"Sound Creator",
+	"35":"Designer",
+	"36":"Test Player",
+	"37":"cabbage   @cabbagestole",
+
+
+	"40":"License",
+
+	"42":"Godot",
+	"43":"https://godotengine.org/license/",
+
+	"45":"Font",
+	"46":"Portions of this software are copyright © <1996-2022>",
+	"47":"The FreeType Project (www.freetype.org). All rights reserved.",
 	
 	
-	"48":"Source Code(MIT License)",
-	"49":"https://github.com/cabbagestole/AliensCame",
+	"50":"this Game",
+	"51":"Source Code(MIT License)",
+	"52":"https://github.com/cabbagestole/AliensCame",
 	
 	"55":"企画/制作",
 	"56":"きゃべつ工房",
 
-	
+	"90":"～End of credit～",
+
 
 
 }
