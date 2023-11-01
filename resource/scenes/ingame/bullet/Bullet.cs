@@ -29,6 +29,10 @@ public partial class Bullet : NotifiableArea2D
 		notifyObservers();
 	}
 	
+	// note
+	// If the colliding area 2D is an EnemyBase type, damage is inflicted.
+	// 衝突したエリア2DがEnemyBase型であった場合、ダメージを与えます。
+	//
 	private void OnAreaEntered(Area2D area)
 	{
 		EnemyBase enemybasse = area as EnemyBase;

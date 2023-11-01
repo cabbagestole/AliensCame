@@ -4,6 +4,9 @@ using System;
 public partial class Gray : EnemyBase
 {
 
+	// note
+	// see FlatwoodsMonster.cs
+	//
 	public override void _Ready()
 	{
 		base._Ready();

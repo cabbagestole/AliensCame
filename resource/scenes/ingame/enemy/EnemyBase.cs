@@ -11,6 +11,15 @@ public partial class EnemyBase : NotifiableEnemy
 		
 	private GameProperties _GP = GameProperties.Inst();
 	
+	// note
+	// I felt that the cost of searching the member nodes of a scene 
+	// by string each time was too high, 
+	// so I cached them in private member variables in advance,
+	//  as in Unity.
+	// シーンのメンバーノードを毎回文字列でサーチする
+	// コストが高いと感じたので、Unity のように
+	// 予めプライベートメンバ変数にキャッシュしています。
+	// 
 	public override void _Ready()
 	{
 		_screenSize = GetViewportRect().Size;
@@ -18,6 +27,14 @@ public partial class EnemyBase : NotifiableEnemy
 		_rayCast = GetNode<RayCast2D>("RayCast2D");
 	}
 
+	// note
+	// The alien notifies the observer that 
+	// it has reached the left or right side of the screen.
+	// The alien itself does not move, only notifies the observer. 
+	// The parent node is responsible for the movement.
+	// エイリアンは画面の左右に到達した事を、オブザーバーに通知します。
+	// 通知するだけでエイリアン自身は移動を行いません。親ノードが移動を担当します。
+	//
 	public override void _Process(double delta)
 	{
 		Vector2 pos = GetParent<Node2D>().Position + Position;
@@ -30,6 +47,10 @@ public partial class EnemyBase : NotifiableEnemy
 	}
 
 	private int _hp = 1;
+	// note
+	// This method is called from Bullet.
+	// このメソッドはBulletから呼び出されます。
+	//
 	public void Damage(int damage)
 	{
 		_hp -= damage;
@@ -41,6 +62,14 @@ public partial class EnemyBase : NotifiableEnemy
 		}
 	}
 	
+	// note
+	// Explosion is added to the scene tree as a child of its parent,
+	//  not of the current node (EnemyBase).
+	// This allows the Explosion to continue to exist
+	//  in the scene tree even if EnemyBase disappears.
+	// 爆発はカレントのノード(EnemyBase)ではなくその親の子としてシーンツリーに追加します。
+	// これによってEnamyBaseが消滅しても爆発はシーンツリー上に存在し続ける事が出来ます。
+	// 
 	private void explode()
 	{
 		Explosion explosion = (Explosion)Explosion.Instantiate();
@@ -48,9 +77,9 @@ public partial class EnemyBase : NotifiableEnemy
 		GetParent().AddChild(explosion);
 	}
 
-
 	public void Fire()
 	{
+		// note
 		// 32×32 ドットの敵キャラを48ドット間隔で配置
 		// つまり48-(32/2)=32ドット長のraycastには反応しません。
 		// 前列の空間が空いている敵キャラが弾を撃ちます。
@@ -67,9 +96,12 @@ public partial class EnemyBase : NotifiableEnemy
 		GetParent().GetParent().AddChild(enemyBullet);
 	}
 
+	// note
+	// No score is set for the base class. Override the score in the derived class.
+	// 基底クラスでは点数を定めません。派生クラスで点数をオーバーライドしてください。
 	protected virtual int Point()
 	{
-		return 0;//派生先で点数をオーバーライドしてください
+		return 0;
 	}
 
 

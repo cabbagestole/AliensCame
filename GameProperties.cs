@@ -1,6 +1,10 @@
 using Godot;
 using System;
 
+// note
+// Data class to record scores and high scores.
+// スコアやハイスコアを記録するデータクラス。
+// 
 public class GameProperties
 {
 	private int _score = 0;
@@ -10,7 +14,11 @@ public class GameProperties
 
 	private static GameProperties _self = null;
 
-
+	// note
+	// Make the constructor private to prohibit direct new. 
+	// Singleton's standard.
+	// コンストラクタをprivateにして直接newを禁止する。シングルトンの定石。
+	//
 	private GameProperties()
 	{
 		// for singleton
