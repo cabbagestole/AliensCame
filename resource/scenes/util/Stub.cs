@@ -1,9 +1,9 @@
 using Godot;
 using System;
 
-//
-// 色々テストをする為のスタブ
-// 
+// note
+// Stubs for various tests. Not used.
+// 色々テストをする為のスタブ。使用していません。
 //
 public partial class Stub : Node2D
 {

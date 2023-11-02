@@ -1,6 +1,10 @@
 using Godot;
 using System;
 
+// note
+// Observer pattern for Enemy only.
+// Enemy専用のObserverパターン。
+// 
 public partial class NotifiableEnemy : Area2D
 {
 	private Action<Direction> _touchObserver = null;

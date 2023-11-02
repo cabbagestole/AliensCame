@@ -1,6 +1,10 @@
 using Godot;
 using System;
 
+// note
+// Text flowing from bottom to top in credits.
+// クレジット画面で下から上に流れる文字。
+//
 public partial class MovingText : Node2D
 {
 	public float Start = 0;

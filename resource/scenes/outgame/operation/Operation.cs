@@ -1,6 +1,9 @@
 using Godot;
 using System;
 
+// note
+// Operation description screen.
+// 操作説明画面。
 public partial class Operation : NotifiableCanvasLayer
 {
 	public InputSystem InputSystem { get; set; }

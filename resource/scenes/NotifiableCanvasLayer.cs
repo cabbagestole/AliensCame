@@ -1,6 +1,10 @@
 using Godot;
 using System;
 
+// note
+// Observer pattern for CanvasLayer only.
+// CanvasLayer専用のObserverパターン。
+// 
 public partial class NotifiableCanvasLayer : CanvasLayer
 {
 	private Action<GameScene, GameScene> _sceneChangeObserver = null;

@@ -1,6 +1,9 @@
 using Godot;
 using System;
 
+// note
+// title screen.
+// タイトル画面。
 public partial class Title : NotifiableCanvasLayer
 {
 	public InputSystem InputSystem { get; set; }

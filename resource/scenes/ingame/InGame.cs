@@ -1,6 +1,10 @@
 using Godot;
 using System;
 
+// note
+// Screen for ingame.
+// インゲーム用画面。
+
 public partial class InGame : NotifiableCanvasLayer
 {
 	[Export] private PackedScene Ship { get; set; }
@@ -28,7 +32,11 @@ public partial class InGame : NotifiableCanvasLayer
 		GetNode<AudioStreamRepeatPlayer>("AudioStreamRepeatPlayer").Play();
 	}
 
-
+	// note
+	// String search in _Process() is not good,
+	// but the impact is minor, so I cut corners.
+	// _Process()の中で文字列サーチするのはよろしくないが、
+	// 影響は軽微なので手抜きしました。
 	public override void _Process(double delta)
 	{
 		GetNode<Label>("Wave").Text = _GP.Wave.ToString();

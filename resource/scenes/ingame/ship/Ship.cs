@@ -19,6 +19,12 @@ public partial class Ship : NotifiableArea2D
 
 	private GameProperties _GP = GameProperties.Inst();
 	
+	// note
+	// fire() and moveShip() are registered as Observers 
+	// to receive changes in device input.
+	// デバイス入力の変化を受け取るObserverとして
+	// fire()とmoveShip()を登録しています。
+	//
 	public override void _Ready()
 	{
 		InputSystem.AddObserver(fire);
@@ -35,6 +41,11 @@ public partial class Ship : NotifiableArea2D
 		Position = new Vector2(_screenSize.X /2, _screenSize.Y *(float)0.9);
 	}
 	
+	// note
+	// Process to move only the value of _move.
+	// The amount of processing of _Process() is lightened.
+	// _moveの値だけ移動する処理。
+	// _Process()の処理量を軽量にしています。
 	public override void _Process(double delta)
 	{
 		Position += _move * (float)delta * Speed;
