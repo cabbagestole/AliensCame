@@ -44,12 +44,13 @@ public partial class Title : NotifiableCanvasLayer
 
 	private int regurate(int current, float add, int max)
 	{
+		if(0 == add) return current;
 		return regurate(current, (int)(add / Mathf.Abs(add)) , max);
 	}
 	
 	private int regurate(int current, int add, int max)
 	{
-		int ret = current += Mathf.Sign(add);
+		int ret = current + Mathf.Sign(add);
 		ret %= max;
 		return (ret < 0)? max -1: ret;
 	}

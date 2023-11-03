@@ -99,17 +99,10 @@ public partial class InputSystem : Node
 	}
 	
 
-/*
-	public override void _UnhandledInput(InputEvent @event)
-	{
-		if (@event is InputEventKey eventKey)
-			GD.Print("UnHandled = " + eventKey.AsText());
-	}
-*/
 
 	// Inspects events and assigns them to corresponding devices
 	//
-	public override void _Input(InputEvent @event)
+	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (@event is InputEventKey keyEvent)
 			keyboadInput(keyEvent);
@@ -254,11 +247,20 @@ public partial class InputSystem : Node
 	
 	private void joyPadStickInput(InputEventJoypadMotion joyPadStick)
 	{
-		if(Mathf.Abs(joyPadStick.AxisValue) > IgnoreMicromotionRatio ){
+		if((joyPadStick.Axis == JoyAxis.LeftX)||(joyPadStick.Axis == JoyAxis.LeftY)){
 			if(joyPadStick.Axis == JoyAxis.LeftX)
 				_x = joyPadStick.AxisValue;
 			if(joyPadStick.Axis == JoyAxis.LeftY)
 				_y = joyPadStick.AxisValue;
+			
+			Vector2 vec = new Vector2(_x, _y);
+			if(vec.Length() > IgnoreMicromotionRatio ){
+				notifyObservers(vec);
+				_isFirstCall = false;
+			} else {
+				notifyObservers(Vector2.Zero);
+				_isFirstCall = true;
+			}
 		}
 	}
 	
@@ -272,8 +274,11 @@ public partial class InputSystem : Node
 	private bool _isMove = false;
 	private bool _isFirstCall = true;	
 	
-	public override void _PhysicsProcess(double delta)
+	public override void _Process(double delta)
 	{
+		// note
+		// Press Button Check
+		//
 		if(_isPressSouth){
 			_pressCountSouth++;
 			if(_pressCountSouth >= DelayFrameCount){
@@ -282,15 +287,13 @@ public partial class InputSystem : Node
 		}else{
 			_pressCountSouth = 0;
 		}
-		if(_goNorth || _goSouth || _goEast || _goWest){
+		// note
+		// arrow key  Check
+		if(_goNorth || _goSouth || _goEast || _goWest ){
 			_isMove = true;
-			if((0 == _x) && (0 == _y)){
-				float x = (_goEast? 1: 0) + (_goWest? -1: 0);
-				float y = (_goSouth? 1: 0) + (_goNorth? -1: 0);
-				notifyObservers(new Vector2(x, y).LimitLength(1));
-			}else{
-				notifyObservers(new Vector2(_x, _y));
-			}
+			float x = (_goEast? 1: 0) + (_goWest? -1: 0);
+			float y = (_goSouth? 1: 0) + (_goNorth? -1: 0);
+			notifyObservers(new Vector2(x, y).LimitLength(1));
 			_isFirstCall = false;
 		}else{
 			// this is service. Send Vector.Zero only once when there is no more input.
@@ -300,6 +303,8 @@ public partial class InputSystem : Node
 				_isFirstCall = true;
 			}
 		}
+
+
 	}
 
 
