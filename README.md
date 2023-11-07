@@ -4,10 +4,9 @@ Still in production. I will add a readme when it is completed.
 
 
 シンプルなインベーダーゲームをGodot4.1とC#で作る練習です。
-コードは完成してるけど、コメントとreadmeが工事中。
 
 
-# UNDERCONSTRUCTION
+# Introduction
 
 ## OutGame
 ### scene contoroller (Main.cs)
